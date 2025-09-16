@@ -1,0 +1,36 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  main:
+    web-application-type: reactive
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+          # Автоматическое создание маршрутов для всех сервисов
+          predicates:
+            - name: Path
+              args:
+                pattern: "'/' + serviceId + '/**'"
+          filters:
+            - name: StripPrefix
+              args:
+                parts: 1
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8081/eureka/
+  instance:
+    prefer-ip-address: true
+
+logging:
+  pattern:
+    console: "%C{1.} [%-5level] %d{HH:mm:ss} - %msg%n"
+  level:
+    org.springframework.cloud.gateway: DEBUG
