@@ -1,4 +1,4 @@
-package ru.javabegin.micro.demo.eurekaclient.controller;
+package ru.javabegin.micro.demo.eurekaclient2.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class TestController {
+public class NewController {
 
     @Value("${spring.application.name}")
     private String applicationName;
@@ -25,13 +25,13 @@ public class TestController {
         return "Привет из " + applicationName + "!";
     }
 
-    // Эндпоинты с префиксом /main
-    @GetMapping("/main/test")
-    public String testWithPrefix(){
-        return "Приложение " + applicationName + " работает на порту " + port;
+    // Эндпоинты с префиксом /new
+    @GetMapping("/new/name")
+    public String nameWithPrefix(){
+        return "Hello, World!";
     }
 
-    @GetMapping("/main/health")
+    @GetMapping("/new/health")
     public String health(){
         return "Eureka Client работает корректно!";
     }
